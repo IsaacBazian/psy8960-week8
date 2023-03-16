@@ -43,7 +43,12 @@ ggplot(week8_tbl, aes(x = meanq1q6, y = meanq8q10)) +
   geom_smooth(method = "lm", color = "purple")
 ```
 
+## Analysis
 
+We observe a correlation of `r cor(week8_tbl$meanq1q6, week8_tbl$meanq8q10)` between the mean score of q1 through q6 and the mean score of q8 through q10. With a p-value of 0.56, we would expect to see a correlation at least this strong roughly 56% of the time assuming that the correlation is actually 0, and would generally fail to reject the null hypothesis that the correlation is 0.
+```{r analysis}
+cor.test(week8_tbl$meanq1q6, week8_tbl$meanq8q10)
+```
 
 
 
