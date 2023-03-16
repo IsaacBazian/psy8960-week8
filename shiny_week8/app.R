@@ -1,3 +1,4 @@
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(shiny)
 library(tidyverse)
 
@@ -7,7 +8,6 @@ ui <- fluidPage(
     # Application title
     titlePanel("PSY 8960 Week 8 Shiny App"),
 
-    # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
             radioButtons("gender", "Gender:", choices = c("Male", "Female", "All"), selected = "All"),
@@ -22,9 +22,9 @@ ui <- fluidPage(
     )
 )
 
-# Define server logic required to draw a histogram
+
 server <- function(input, output) {
-shinydata <- readRDS(file = "shiny_week8/shinydata.rds")
+  shinydata_tbl <- readRDS(file = "shiny_week8/shinydata.rds")
 }
 
 # Run the application 
