@@ -1,4 +1,3 @@
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(shiny)
 library(tidyverse)
 
@@ -24,7 +23,7 @@ ui <- fluidPage(
 
 
 server <- function(input, output) {
-  shinydata_tbl <- readRDS(file = "./shinydata.rds") #Will come back and fix this later, for now I am manually loading the data into my environment for the sake of time
+  shinydata_tbl <- readRDS(file = "./shinydata.rds")
   
   output$plot <- renderPlot({
     if (input$gender == "All") {
