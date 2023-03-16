@@ -29,7 +29,7 @@ server <- function(input, output) {
   output$plot <- renderPlot({
     if (input$gender == "All") {
       shinydata_tbl <- shinydata_tbl #Nothing happens
-    } else if (input$gender == "Male"|"Female"){
+    } else {
       shinydata_tbl <- shinydata_tbl %>% 
         filter(gender == input$gender)
     }
