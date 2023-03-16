@@ -24,7 +24,34 @@ ui <- fluidPage(
 
 
 server <- function(input, output) {
-  shinydata_tbl <- readRDS(file = "shiny_week8/shinydata.rds")
+  shinydata_tbl <- readRDS(file = "./shinydata.rds") #Will come back and fix this later, for now I am manually loading the data into my environment for the sake of time
+  
+  output$plot <- renderPlot({
+    if (input$gender == "All") {
+      shinydata_tbl <- shinydata_tbl #Nothing happens
+    } else if (input$gender == "Male"|"Female"){
+      shinydata_tbl <- shinydata_tbl %>% 
+        filter(gender == input$gender)
+    }
+    
+    if (input$date == "Include") {
+      shinydata_tbl <- shinydata_tbl #Nothing happens
+    } else if (input$date == "Exclude") {
+      shinydata_tbl <- shinydata_tbl %>% 
+        filter(timeEnd >= ymd_hms("2017-08-01 00:00:00"))
+    }
+    
+    if (input$error_band == "Display Error Band") {
+      ggplot(shinydata_tbl, aes(x = meanq1q6, y = meanq8q10)) +
+        geom_point() +
+        geom_smooth(method = "lm", color = "purple")
+    } else if (input$error_band == "Suppress Error Band"){
+      ggplot(shinydata_tbl, aes(x = meanq1q6, y = meanq8q10)) +
+        geom_point() +
+        geom_smooth(method = "lm", color = "purple", SE = FALSE)
+    }
+    
+    })
 }
 
 # Run the application 

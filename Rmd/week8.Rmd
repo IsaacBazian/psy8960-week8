@@ -23,6 +23,7 @@ library(tidyverse)
 This chunk reads in the raw data, recodes the values for q5 in reverse order, then adds two columns for the means of q1 through q6 and q8 through q10, respectively, for later visualization and analysis.
 ```{r data_import_and_cleaning}
 week8_tbl <- read_csv(file = "../data/week3.csv") %>% 
+  mutate(gender = recode_factor(gender, M = "Male", F = "Female")) %>% 
   mutate(q5 = recode(q5, "1" = "5", "2" = "4", "3" = "3", "4" = "2", "5" = "1")) %>% 
   mutate(q5 = as.numeric(q5)) %>%
   rowwise() %>% 
