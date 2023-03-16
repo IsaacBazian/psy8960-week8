@@ -41,7 +41,8 @@ week8_tbl %>%
 
 ggplot(week8_tbl, aes(x = meanq1q6, y = meanq8q10)) +
   geom_point() +
-  geom_smooth(method = "lm", color = "purple")
+  geom_smooth(method = "lm", color = "purple") +
+  labs(x = "Q1-Q6 Mean Scores", y = "Q8-Q10 Mean Scores")
 ```
 
 ## **Analysis**

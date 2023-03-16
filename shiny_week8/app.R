@@ -40,11 +40,13 @@ server <- function(input, output) {
     if (input$error_band == "Display Error Band") {
       ggplot(shinydata_tbl, aes(x = meanq1q6, y = meanq8q10)) +
         geom_point() +
-        geom_smooth(method = "lm", color = "purple")
+        geom_smooth(method = "lm", color = "purple") +
+        labs(x = "Q1-Q6 Mean Scores", y = "Q8-Q10 Mean Scores")
     } else if (input$error_band == "Suppress Error Band"){
       ggplot(shinydata_tbl, aes(x = meanq1q6, y = meanq8q10)) +
         geom_point() +
-        geom_smooth(method = "lm", color = "purple", se = FALSE)
+        geom_smooth(method = "lm", color = "purple", se = FALSE) +
+        labs(x = "Q1-Q6 Mean Scores", y = "Q8-Q10 Mean Scores")
     }
     
     })
