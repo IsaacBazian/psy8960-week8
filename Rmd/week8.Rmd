@@ -50,6 +50,12 @@ We observe a correlation of `r cor(week8_tbl$meanq1q6, week8_tbl$meanq8q10)` bet
 cor.test(week8_tbl$meanq1q6, week8_tbl$meanq8q10)
 ```
 
+## Data Export
+
+This chunk takes the cleaned dataset and saves it to the shiny directory for use there.
+```{r}
+saveRDS(week8_tbl, file = "../Rshiny/shinydata.rds")
+```
 
 
 
