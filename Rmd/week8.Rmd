@@ -7,8 +7,9 @@ output:
     df_print: paged
 ---
 ## **Reproducible Image and Online Resources**
+An image of this project as of *`r Sys.Date()`* can be accessed by clicking this link.
 
-Stuff goes here at the end
+An interactive web app is available by clicking this link instead.
 
 ## **Script Settings and Resources**
 
@@ -23,7 +24,6 @@ library(tidyverse)
 This chunk reads in the raw data, recodes the values for q5 in reverse order, then adds two columns for the means of q1 through q6 and q8 through q10, respectively, for later visualization and analysis.
 ```{r data_import_and_cleaning}
 week8_tbl <- read_csv(file = "../data/week3.csv") %>% 
-  mutate(gender = recode_factor(gender, M = "Male", F = "Female")) %>% 
   mutate(q5 = recode(q5, "1" = "5", "2" = "4", "3" = "3", "4" = "2", "5" = "1")) %>% 
   mutate(q5 = as.numeric(q5)) %>%
   rowwise() %>% 
@@ -54,9 +54,10 @@ cor.test(week8_tbl$meanq1q6, week8_tbl$meanq8q10)
 
 ## **Data Export**
 
-This chunk takes the cleaned dataset, drops all variables not needed for the shiny app, and saves it to the shiny directory for use there.
+This chunk takes the cleaned dataset, converts the gender variable into the form needed for the shiny app, drops all variables not needed for the shiny app, and saves it to the shiny directory for use there.
 ```{r}
 week8_tbl %>% 
+  mutate(gender = recode_factor(gender, M = "Male", F = "Female")) %>%
   select(-timeStart, -condition, -q7) %>% 
   saveRDS(file = "../shiny_week8/shinydata.rds")
 ```
