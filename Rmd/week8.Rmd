@@ -6,11 +6,11 @@ output:
   html_document:
     df_print: paged
 ---
-## Reproducible Image and Online Resources
+## **Reproducible Image and Online Resources**
 
 Stuff goes here at the end
 
-## Script Settings and Resources
+## **Script Settings and Resources**
 
 ```{r script_settings_and_resources, message=FALSE}
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
@@ -18,7 +18,7 @@ library(tidyverse)
 
 ```
 
-## Data Import and Cleaning
+## **Data Import and Cleaning**
 
 This chunk reads in the raw data, recodes the values for q5 in reverse order, then adds two columns for the means of q1 through q6 and q8 through q10, respectively, for later visualization and analysis.
 ```{r data_import_and_cleaning}
@@ -31,7 +31,7 @@ week8_tbl <- read_csv(file = "../data/week3.csv") %>%
   
 ```
 
-## Visualization
+## **Visualization**
 
 This chunk take the full dataset, restricts is down to just the q1 through q6 columns, and displays that table. It also makes a scatter plot the of the mean score of q1 through q6 on the x axis and  q8 through q10 on the y axis, then adds a purple OLS line with shaded error bands. 
 ```{r visualization, echo = F, message = FALSE}
@@ -43,14 +43,14 @@ ggplot(week8_tbl, aes(x = meanq1q6, y = meanq8q10)) +
   geom_smooth(method = "lm", color = "purple")
 ```
 
-## Analysis
+## **Analysis**
 
 We observe a correlation of `r cor(week8_tbl$meanq1q6, week8_tbl$meanq8q10)` between the mean score of q1 through q6 and the mean score of q8 through q10. With a p-value of 0.56, we would expect to see a correlation at least this strong roughly 56% of the time assuming that the correlation is actually 0, and would generally fail to reject the null hypothesis that the correlation is 0.
 ```{r analysis}
 cor.test(week8_tbl$meanq1q6, week8_tbl$meanq8q10)
 ```
 
-## Data Export
+## **Data Export**
 
 This chunk takes the cleaned dataset, drops all variables not needed for the shiny app, and saves it to the shiny directory for use there.
 ```{r}
