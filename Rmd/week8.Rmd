@@ -52,9 +52,11 @@ cor.test(week8_tbl$meanq1q6, week8_tbl$meanq8q10)
 
 ## Data Export
 
-This chunk takes the cleaned dataset and saves it to the shiny directory for use there.
+This chunk takes the cleaned dataset, drops all variables not needed for the shiny app, and saves it to the shiny directory for use there.
 ```{r}
-saveRDS(week8_tbl, file = "../Rshiny/shinydata.rds")
+week8_tbl %>% 
+  select(-timeStart, -condition, -q7) %>% 
+  saveRDS(file = "../Rshiny/shinydata.rds")
 ```
 
 
