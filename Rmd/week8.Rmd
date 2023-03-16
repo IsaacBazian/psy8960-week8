@@ -20,11 +20,26 @@ library(tidyverse)
 
 ## Data Import and Cleaning
 
+This chunk reads in the raw data, recodes the values for q5 in reverse order, then adds two columns for the means of q1 through q6 and q8 through q10, respectively, for later visualization and analysis.
 ```{r data_import_and_cleaning}
 week8_tbl <- read_csv(file = "../data/week3.csv") %>% 
   mutate(q5 = recode(q5, "1" = "5", "2" = "4", "3" = "3", "4" = "2", "5" = "1")) %>% 
-  mutate(q5 = as.numeric(q5))
+  mutate(q5 = as.numeric(q5)) %>% 
+  mutate(meanq1q6 = rowMeans(select(week8_tbl, q1:q6))) %>% 
+  mutate(meanq8q10 = rowMeans(select(week8_tbl, q8:q10)))
+
 ```
+
+## Visualization
+
+```{r visualization}
+
+```
+
+
+
+
+
 
 
 
