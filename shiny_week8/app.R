@@ -48,7 +48,7 @@ server <- function(input, output) {
     } else if (input$error_band == "Suppress Error Band"){
       ggplot(shinydata_tbl, aes(x = meanq1q6, y = meanq8q10)) +
         geom_point() +
-        geom_smooth(method = "lm", color = "purple", SE = FALSE)
+        geom_smooth(method = "lm", color = "purple", se = FALSE)
     }
     
     })
