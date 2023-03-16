@@ -33,9 +33,14 @@ week8_tbl <- read_csv(file = "../data/week3.csv") %>%
 
 ## Visualization
 
-```{r visualization}
-#week8_tbl %>% 
-  #select(q1:q6)
+This chunk take the full dataset, restricts is down to just the q1 through q6 columns, and displays that table. It also makes a scatter plot the of the mean score of q1 through q6 on the x axis and  q8 through q10 on the y axis, then adds a purple OLS line with shaded error bands. 
+```{r visualization, echo = F, message = FALSE}
+week8_tbl %>% 
+  select(q1:q6)
+
+ggplot(week8_tbl, aes(x = meanq1q6, y = meanq8q10)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "purple")
 ```
 
 
