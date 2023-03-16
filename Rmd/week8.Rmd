@@ -21,7 +21,9 @@ library(tidyverse)
 ## Data Import and Cleaning
 
 ```{r data_import_and_cleaning}
-week8_tbl <- read_csv(file = "../data/week3.csv")
+week8_tbl <- read_csv(file = "../data/week3.csv") %>% 
+  mutate(q5 = recode(q5, "1" = "5", "2" = "4", "3" = "3", "4" = "2", "5" = "1")) %>% 
+  mutate(q5 = as.numeric(q5))
 ```
 
 
