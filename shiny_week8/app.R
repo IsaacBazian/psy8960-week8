@@ -1,10 +1,8 @@
 library(shiny)
 library(tidyverse)
 
-# Define UI for application that draws a histogram
 ui <- fluidPage(
 
-    # Application title
     titlePanel("PSY 8960 Week 8 Shiny App"),
 
     sidebarLayout(
@@ -14,7 +12,6 @@ ui <- fluidPage(
             radioButtons("date", "Completed Before August 1st, 2017:", choices = c("Include", "Exclude"), selected = "Include")
         ),
 
-        # Show a plot of the generated distribution
         mainPanel(
            plotOutput("plot")
         )
@@ -53,5 +50,4 @@ server <- function(input, output) {
     })
 }
 
-# Run the application 
 shinyApp(ui = ui, server = server)
