@@ -56,7 +56,7 @@ This chunk takes the cleaned dataset, drops all variables not needed for the shi
 ```{r}
 week8_tbl %>% 
   select(-timeStart, -condition, -q7) %>% 
-  saveRDS(file = "../Rshiny/shinydata.rds")
+  saveRDS(file = "../shiny_week8/shinydata.rds")
 ```
 
 
