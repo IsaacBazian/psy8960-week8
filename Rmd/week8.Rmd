@@ -7,7 +7,7 @@ output:
     df_print: paged
 ---
 ## **Reproducible Image and Online Resources**
-An image of this project as of *`r Sys.Date()`* can be accessed by clicking this link.
+An image of this project as of *`r Sys.Date()`* can be accessed by [clicking this link](https://mybinder.org/v2/gh/IsaacBazian/psy8960-week8/HEAD?urlpath=rstudio).
 
 An interactive web app is available by clicking this link instead.
 
