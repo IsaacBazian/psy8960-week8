@@ -23,16 +23,12 @@ server <- function(input, output) {
   shinydata_tbl <- readRDS(file = "./shinydata.rds")
   
   output$plot <- renderPlot({
-    if (input$gender == "All") {
-      shinydata_tbl <- shinydata_tbl #Nothing happens
-    } else {
+    if (input$gender != "All") {
       shinydata_tbl <- shinydata_tbl %>% 
         filter(gender == input$gender)
     }
     
-    if (input$date == "Include") {
-      shinydata_tbl <- shinydata_tbl #Nothing happens
-    } else if (input$date == "Exclude") {
+    if (input$date != "Include") {
       shinydata_tbl <- shinydata_tbl %>% 
         filter(timeEnd >= ymd_hms("2017-08-01 00:00:00"))
     }
