@@ -11,7 +11,7 @@
 
 <meta name="author" content="Isaac Bazian" />
 
-<meta name="date" content="2023-03-16" />
+<meta name="date" content="2023-03-19" />
 
 <title>PSY 8960 Week 8 Project</title>
 
@@ -1623,14 +1623,14 @@ display: none;
 
 <h1 class="title toc-ignore">PSY 8960 Week 8 Project</h1>
 <h4 class="author">Isaac Bazian</h4>
-<h4 class="date">2023-03-16</h4>
+<h4 class="date">2023-03-19</h4>
 
 </div>
 
 
 <div id="reproducible-image-and-online-resources" class="section level2">
 <h2><strong>Reproducible Image and Online Resources</strong></h2>
-<p>An image of this project as of <em>2023-03-16</em> can be accessed by
+<p>An image of this project as of <em>2023-03-19</em> can be accessed by
 <a href="https://mybinder.org/v2/gh/IsaacBazian/psy8960-week8/HEAD?urlpath=rstudio">clicking
 this link</a>.</p>
 <p>An interactive web app is available by <a href="https://isaacbazian.shinyapps.io/shiny_week8/">clicking this link
@@ -1645,7 +1645,10 @@ library(tidyverse)</code></pre>
 <h2><strong>Data Import and Cleaning</strong></h2>
 <p>This chunk reads in the raw data, recodes the values for q5 in
 reverse order, then adds two columns for the means of q1 through q6 and
-q8 through q10, respectively, for later visualization and analysis.</p>
+q8 through q10, respectively, for later visualization and analysis. By
+doing all of the importing, recoding, and generation of new variables
+now, I do not need to change the dataset again until it’s time to export
+it for the Shiny app.</p>
 <pre class="r"><code>week8_tbl &lt;- read_csv(file = &quot;../data/week3.csv&quot;) %&gt;% 
   mutate(q5 = recode(q5, &quot;1&quot; = &quot;5&quot;, &quot;2&quot; = &quot;4&quot;, &quot;3&quot; = &quot;3&quot;, &quot;4&quot; = &quot;2&quot;, &quot;5&quot; = &quot;1&quot;)) %&gt;% 
   mutate(q5 = as.numeric(q5)) %&gt;%
@@ -1668,6 +1671,9 @@ This chunk take the full dataset, restricts is down to just the q1
 through q6 columns, and displays that table. It also makes a scatter
 plot the of the mean score of q1 through q6 on the x axis and q8 through
 q10 on the y axis, then adds a purple OLS line with shaded error bands.
+It was easier to do this in two separate sets of pipes, with the table
+already paginated by the YAML header settings and the plot being built
+up layer-by-layer in very simple individual steps.
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["q1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["q2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["q3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["q4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["q5"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["q6"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"5","2":"4","3":"4","4":"1","5":"2","6":"1"},{"1":"2","2":"4","3":"3","4":"1","5":"3","6":"1"},{"1":"5","2":"5","3":"2","4":"1","5":"5","6":"1"},{"1":"4","2":"3","3":"4","4":"2","5":"4","6":"1"},{"1":"3","2":"1","3":"3","4":"5","5":"2","6":"1"},{"1":"4","2":"3","3":"2","4":"3","5":"3","6":"1"},{"1":"2","2":"4","3":"1","4":"3","5":"1","6":"1"},{"1":"4","2":"2","3":"5","4":"1","5":"1","6":"1"},{"1":"2","2":"5","3":"3","4":"4","5":"2","6":"1"},{"1":"3","2":"4","3":"2","4":"4","5":"5","6":"1"},{"1":"5","2":"2","3":"3","4":"1","5":"5","6":"1"},{"1":"3","2":"1","3":"3","4":"5","5":"4","6":"1"},{"1":"5","2":"5","3":"2","4":"3","5":"4","6":"1"},{"1":"1","2":"3","3":"5","4":"4","5":"2","6":"1"},{"1":"4","2":"1","3":"5","4":"1","5":"1","6":"1"},{"1":"1","2":"3","3":"2","4":"4","5":"5","6":"3"},{"1":"2","2":"5","3":"4","4":"3","5":"4","6":"1"},{"1":"4","2":"4","3":"1","4":"3","5":"5","6":"1"},{"1":"2","2":"3","3":"1","4":"1","5":"4","6":"1"},{"1":"3","2":"1","3":"2","4":"2","5":"1","6":"1"},{"1":"3","2":"4","3":"3","4":"3","5":"5","6":"1"},{"1":"3","2":"1","3":"1","4":"2","5":"3","6":"1"},{"1":"5","2":"4","3":"4","4":"2","5":"5","6":"1"},{"1":"5","2":"2","3":"1","4":"2","5":"4","6":"4"},{"1":"3","2":"3","3":"1","4":"4","5":"5","6":"1"},{"1":"5","2":"1","3":"3","4":"4","5":"5","6":"1"},{"1":"2","2":"4","3":"5","4":"4","5":"2","6":"1"},{"1":"2","2":"4","3":"5","4":"5","5":"3","6":"1"},{"1":"5","2":"5","3":"3","4":"2","5":"4","6":"1"},{"1":"1","2":"4","3":"2","4":"4","5":"2","6":"1"},{"1":"4","2":"1","3":"4","4":"5","5":"1","6":"1"},{"1":"3","2":"4","3":"3","4":"2","5":"1","6":"1"},{"1":"3","2":"5","3":"5","4":"5","5":"5","6":"5"},{"1":"3","2":"1","3":"5","4":"5","5":"2","6":"1"},{"1":"3","2":"1","3":"2","4":"4","5":"5","6":"1"},{"1":"3","2":"3","3":"1","4":"1","5":"1","6":"1"},{"1":"4","2":"2","3":"2","4":"5","5":"1","6":"1"},{"1":"1","2":"3","3":"3","4":"5","5":"4","6":"1"},{"1":"5","2":"4","3":"3","4":"3","5":"1","6":"1"},{"1":"5","2":"1","3":"5","4":"2","5":"2","6":"1"},{"1":"3","2":"3","3":"4","4":"1","5":"2","6":"1"},{"1":"5","2":"4","3":"1","4":"1","5":"2","6":"1"},{"1":"4","2":"5","3":"3","4":"2","5":"2","6":"1"},{"1":"4","2":"1","3":"3","4":"1","5":"2","6":"1"},{"1":"5","2":"3","3":"3","4":"5","5":"5","6":"1"},{"1":"1","2":"4","3":"2","4":"2","5":"1","6":"1"},{"1":"2","2":"1","3":"1","4":"3","5":"1","6":"1"},{"1":"4","2":"1","3":"5","4":"2","5":"4","6":"1"},{"1":"4","2":"2","3":"3","4":"1","5":"3","6":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -1678,9 +1684,11 @@ q10 on the y axis, then adds a purple OLS line with shaded error bands.
 <div id="analysis" class="section level2">
 <h2><strong>Analysis</strong></h2>
 <p>We observe a correlation of 0.0847457 between the mean score of q1
-through q6 and the mean score of q8 through q10. With a p-value of 0.56,
-we would expect to see a correlation at least this strong roughly 56% of
-the time assuming that the correlation is actually 0, and would
+through q6 and the mean score of q8 through q10. With a p-value of 0.56
+obtained from the cor.test function (used because it very
+straightforwardly addresses this question and because we were instructed
+to), we would expect to see a correlation at least this strong roughly
+56% of the time assuming that the correlation is actually 0, and would
 generally fail to reject the null hypothesis that the correlation is
 0.</p>
 <pre class="r"><code>cor.test(week8_tbl$meanq1q6, week8_tbl$meanq8q10)</code></pre>
@@ -1700,8 +1708,10 @@ generally fail to reject the null hypothesis that the correlation is
 <h2><strong>Data Export</strong></h2>
 <p>This chunk takes the cleaned dataset, converts the gender variable
 into the form needed for the shiny app, drops all variables not needed
-for the shiny app, and saves it to the shiny directory for use
-there.</p>
+for the shiny app, and saves it to the shiny directory for use there. In
+this form the dataset is already in the form it needs to be for the app
+to start using it for visualization, and we don’t need to waste
+processing time by cleaning the data in the app itself.</p>
 <pre class="r"><code>week8_tbl %&gt;% 
   mutate(gender = recode_factor(gender, M = &quot;Male&quot;, F = &quot;Female&quot;)) %&gt;%
   select(-timeStart, -condition, -q7) %&gt;% 

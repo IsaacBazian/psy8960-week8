@@ -21,7 +21,7 @@ library(tidyverse)
 
 ## **Data Import and Cleaning**
 
-This chunk reads in the raw data, recodes the values for q5 in reverse order, then adds two columns for the means of q1 through q6 and q8 through q10, respectively, for later visualization and analysis.
+This chunk reads in the raw data, recodes the values for q5 in reverse order, then adds two columns for the means of q1 through q6 and q8 through q10, respectively, for later visualization and analysis. By doing all of the importing, recoding, and generation of new variables now, I do not need to change the dataset again until it's time to export it for the Shiny app.
 ```{r data_import_and_cleaning}
 week8_tbl <- read_csv(file = "../data/week3.csv") %>% 
   mutate(q5 = recode(q5, "1" = "5", "2" = "4", "3" = "3", "4" = "2", "5" = "1")) %>% 
@@ -34,7 +34,7 @@ week8_tbl <- read_csv(file = "../data/week3.csv") %>%
 
 ## **Visualization**
 
-This chunk take the full dataset, restricts is down to just the q1 through q6 columns, and displays that table. It also makes a scatter plot the of the mean score of q1 through q6 on the x axis and  q8 through q10 on the y axis, then adds a purple OLS line with shaded error bands. 
+This chunk take the full dataset, restricts is down to just the q1 through q6 columns, and displays that table. It also makes a scatter plot the of the mean score of q1 through q6 on the x axis and  q8 through q10 on the y axis, then adds a purple OLS line with shaded error bands. It was easier to do this in two separate sets of pipes, with the table already paginated by the YAML header settings and the plot being built up layer-by-layer in very simple individual steps.
 ```{r visualization, echo = F, message = FALSE}
 week8_tbl %>% 
   select(q1:q6)
@@ -47,14 +47,14 @@ ggplot(week8_tbl, aes(x = meanq1q6, y = meanq8q10)) +
 
 ## **Analysis**
 
-We observe a correlation of `r cor(week8_tbl$meanq1q6, week8_tbl$meanq8q10)` between the mean score of q1 through q6 and the mean score of q8 through q10. With a p-value of 0.56, we would expect to see a correlation at least this strong roughly 56% of the time assuming that the correlation is actually 0, and would generally fail to reject the null hypothesis that the correlation is 0.
+We observe a correlation of `r cor(week8_tbl$meanq1q6, week8_tbl$meanq8q10)` between the mean score of q1 through q6 and the mean score of q8 through q10. With a p-value of 0.56 obtained from the cor.test function (used because it very straightforwardly addresses this question and because we were instructed to), we would expect to see a correlation at least this strong roughly 56% of the time assuming that the correlation is actually 0, and would generally fail to reject the null hypothesis that the correlation is 0.
 ```{r analysis}
 cor.test(week8_tbl$meanq1q6, week8_tbl$meanq8q10)
 ```
 
 ## **Data Export**
 
-This chunk takes the cleaned dataset, converts the gender variable into the form needed for the shiny app, drops all variables not needed for the shiny app, and saves it to the shiny directory for use there.
+This chunk takes the cleaned dataset, converts the gender variable into the form needed for the shiny app, drops all variables not needed for the shiny app, and saves it to the shiny directory for use there. In this form the dataset is already in the form it needs to be for the app to start using it for visualization, and we don't need to waste processing time by cleaning the data in the app itself.
 ```{r}
 week8_tbl %>% 
   mutate(gender = recode_factor(gender, M = "Male", F = "Female")) %>%
